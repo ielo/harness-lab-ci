@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_ielo_harness_lab_ci_1795368949731-pr-trigger-input-set
+  identifier: Build_ielo_harness_lab_ci_1795368949731prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Rafa_Ielo
+  pipeline:
+    identifier: Build_ielo_harness_lab_ci_1795368949731
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
