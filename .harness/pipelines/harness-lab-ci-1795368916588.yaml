@@ -1,0 +1,33 @@
+pipeline:
+  name: Build harness-lab-ci
+  identifier: Build_ielo_harness_lab_ci_1795368949731
+  projectIdentifier: Rafa_Ielo
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: ielo/harness-lab-ci
+        build: <+input>
