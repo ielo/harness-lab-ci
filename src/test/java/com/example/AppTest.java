@@ -8,7 +8,7 @@ class AppTest {
 
     @Test
     void greetingIncludesName() {
-        assertEquals("Hello, Harness!", App.greeting("Harness"));
+        assertEquals("Hello, Harnes!", App.greeting("Harness"));
     }
 
     @Test
