@@ -47,10 +47,14 @@ pipeline:
                     registryRef: ielo_docker
           platform:
             os: Linux
+            arch: Amd64
           runtime:
             type: Docker
-            spec: {}
+            spec:
+              harnessImageConnectorRef: ielodocker
         description: ""
+        delegateSelectors:
+          - ielo-delegate
   properties:
     ci:
       codebase:
