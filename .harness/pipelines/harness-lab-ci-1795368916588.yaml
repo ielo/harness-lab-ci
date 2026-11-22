@@ -14,17 +14,45 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Echo Welcome Message
-                  identifier: Echo_Welcome_Message
+                  name: mv_build
+                  identifier: mv_build
                   spec:
+                    registryRef: ielo_docker
+                    image: maven:3.9-eclipse-temurin-17
                     shell: Sh
-                    command: echo "Welcome to Harness CI"
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
+                    command: mvn clean package -DskipTests
+              - step:
+                  type: Run
+                  name: tests
+                  identifier: tests
+                  spec:
+                    registryRef: ielo_docker
+                    image: maven:3.9-eclipse-temurin-17
+                    shell: Sh
+                    command: mvn test
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/surefire-reports/*.xml
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: build_and_push
+                  identifier: build_and_push
+                  spec:
+                    repo: ielo/ielo_harness_ci
+                    tags:
+                      - <+pipeline.sequenceId>
+                      - latest
+                    registryRef: ielo_docker
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: ielo_ci_delegate
+              namespace: harness
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
   properties:
     ci:
       codebase:
