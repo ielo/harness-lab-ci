@@ -45,14 +45,12 @@ pipeline:
                       - <+pipeline.sequenceId>
                       - latest
                     registryRef: ielo_docker
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: ielo_ci_delegate
-              namespace: harness
-              automountServiceAccountToken: true
-              nodeSelector: {}
-              os: Linux
+          platform:
+            os: Linux
+          runtime:
+            type: Docker
+            spec: {}
+        description: ""
   properties:
     ci:
       codebase:
