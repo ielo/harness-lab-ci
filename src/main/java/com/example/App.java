@@ -40,7 +40,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        server.createContext("/", exchange -> send(exchange, greeting("Harness")));
+        server.createContext("/", exchange -> send(exchange, greeting("Harness v2")));
         server.createContext("/hello", exchange ->
             send(exchange, greeting(nameFromQuery(exchange.getRequestURI().getRawQuery()))));
         server.createContext("/health", exchange -> send(exchange, healthJson()));
