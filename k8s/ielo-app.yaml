@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ielo-app
-          image: docker.io/ielo/ielo_harness_ci:k8s-2
+          image: <+artifacts.primary.image>
           ports:
             - containerPort: 8080
           readinessProbe:
